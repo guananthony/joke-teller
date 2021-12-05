@@ -105,17 +105,38 @@ const VoiceRSS = {
 	},
 };
 
-function test() {
-	VoiceRSS.speech({
-		key: '7fac9bdc3cf2481abccfa3af204a6bab',
-		src: 'Hello, world!',
-		hl: 'en-us',
-		v: 'Linda',
-		r: 0,
-		c: 'mp3',
-		f: '44khz_16bit_stereo',
-		ssml: false,
-	});
+// function test() {
+// 	VoiceRSS.speech({
+// 		key: '7fac9bdc3cf2481abccfa3af204a6bab',
+// 		src: 'Hello, world!',
+// 		hl: 'en-us',
+// 		v: 'Linda',
+// 		r: 0,
+// 		c: 'mp3',
+// 		f: '44khz_16bit_stereo',
+// 		ssml: false,
+// 	});
+// }
+
+// test();
+
+// Get jokes from Joke API
+async function getJokes() {
+	let joke = '';
+	const apiUrl = 'https://v2.jokeapi.dev/joke/Dark';
+	try {
+		const response = await fetch(apiUrl);
+		const data = await response.json();
+		if (data.setup) {
+			joke = `${data.setup} ... ${data.delivery}`;
+		} else {
+			joke = data.joke;
+		}
+		console.log(joke);
+	} catch (error) {
+		// Catch errors here
+		console.log('Whoops:', error);
+	}
 }
 
-test();
+getJokes();
